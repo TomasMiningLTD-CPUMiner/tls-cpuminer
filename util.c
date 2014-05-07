@@ -24,7 +24,7 @@
 #include <time.h>
 #if defined(WIN32)
 #include <winsock2.h>
-#include <mstcpip.h>
+//#include <mstcpip.h>
 #else
 #include <errno.h>
 #include <sys/socket.h>
@@ -280,6 +280,12 @@ static int sockopt_keepalive_cb(void *userdata, curl_socket_t fd,
 		return 1;
 #endif /* __APPLE_CC__ */
 #else /* WIN32 */
+	struct tcp_keepalive {
+		ULONG	onoff;
+		ULONG	keepalivetime;
+		ULONG	keepaliveinterval;
+	};
+	#define SIO_KEEPALIVE_VALS	_WSAIOW(IOC_VENDOR, 4)
 	struct tcp_keepalive vals;
 	vals.onoff = 1;
 	vals.keepalivetime = tcp_keepidle * 1000;

@@ -112,6 +112,9 @@ fi
 LIBCURL_CHECK_CONFIG(, 7.15.2, ,
   [AC_MSG_ERROR([Missing required libcurl >= 7.15.2])])
 
+AC_CHECK_LIB([crypto], [SHA256], [CRYPTO_LIBS=-lcrypto], [AC_MSG_ERROR([Missing required crypto lib])])
+AC_SUBST([CRYPTO_LIBS])
+
 AC_SUBST(JANSSON_LIBS)
 AC_SUBST(PTHREAD_FLAGS)
 AC_SUBST(PTHREAD_LIBS)

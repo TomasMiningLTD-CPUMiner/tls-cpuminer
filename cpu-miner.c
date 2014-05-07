@@ -103,11 +103,13 @@ struct workio_cmd {
 enum sha256_algos {
 	ALGO_SCRYPT,		/* scrypt(1024,1,1) */
 	ALGO_SHA256D,		/* SHA-256d */
+	ALGO_TWISTER,		/* twister */
 };
 
 static const char *algo_names[] = {
 	[ALGO_SCRYPT]		= "scrypt",
 	[ALGO_SHA256D]		= "sha256d",
+	[ALGO_TWISTER]		= "twister",
 };
 
 bool opt_debug = false;
@@ -128,7 +130,7 @@ int opt_timeout = 0;
 static int opt_scantime = 5;
 static json_t *opt_config;
 static const bool opt_time = true;
-static enum sha256_algos opt_algo = ALGO_SCRYPT;
+static enum sha256_algos opt_algo = ALGO_TWISTER;
 static int opt_n_threads;
 static int num_processors;
 static char *rpc_url;
@@ -781,6 +783,10 @@ static void *miner_thread(void *userdata)
 
 		case ALGO_SHA256D:
 			rc = scanhash_sha256d(thr_id, work.data, work.target,
+			                      max_nonce, &hashes_done);
+			break;
+		case ALGO_TWISTER:
+			rc = scanhash_twister(thr_id, work.data, work.target,
 			                      max_nonce, &hashes_done);
 			break;
 

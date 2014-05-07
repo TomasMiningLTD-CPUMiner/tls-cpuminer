@@ -1,14 +1,14 @@
-This is a multi-threaded CPU miner for Litecoin and Bitcoin,
-fork of Jeff Garzik's reference cpuminer.
+This is a multi-threaded CPU miner for Litecoin, Bitcoin and Tlascoin,
+fork of pooler's reference cpuminer.
 
 License: GPLv2.  See COPYING for details.
 
-Downloads:  https://sourceforge.net/projects/cpuminer/files/
-Git tree:   https://github.com/pooler/cpuminer
+Git tree:   https://github.com/flywalk/tls-cpuminer
 
 Dependencies:
 	libcurl			http://curl.haxx.se/libcurl/
 	jansson			http://www.digip.org/jansson/
+	openssl			http://www.openssl.org/source/
 		(jansson is included in-tree)
 
 Basic *nix build instructions:
